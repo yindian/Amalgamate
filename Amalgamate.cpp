@@ -417,6 +417,8 @@ private:
                               .upToLastOccurrenceOf ("\"", false, false);
 
         parsed.isIncludeLine = true;
+        parsed.preventReinclude = m_preventReincludes.contains (parsed.filename);
+        parsed.forceReinclude = m_forceReincludes.contains (parsed.filename);
       }
       else if (removed.startsWithIgnoreCase ("#include<") && m_checkSystemIncludes)
       {
@@ -424,6 +426,8 @@ private:
         parsed.filename = line.fromFirstOccurrenceOf ("<", false, false)
                               .upToLastOccurrenceOf (">", false, false);
         parsed.isIncludeLine = true;
+        parsed.preventReinclude = m_preventReincludes.contains (parsed.filename);
+        parsed.forceReinclude = m_forceReincludes.contains (parsed.filename);
       }
       else if (removed.startsWithIgnoreCase ("#include"))
       {
